@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EMBRACE Live Wall</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"><style>
+:root{color-scheme:light;--bg:#f6efe5;--surface:#fffaf3;--ink:#3c3531;--muted:#8a7f76;--line:#e7ddce;--accent:#a75f50;--sage:#6f8a7d;--gold:#c49a55}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#17140f;--surface:#221c15;--ink:#efe8dd;--muted:#a79c8d;--line:#332c22;--accent:#e0a593;--sage:#8fb3a3;--gold:#e4b659}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Fraunces",Georgia,serif}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+#join{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 20px}
+.jwrap{width:100%;max-width:520px;display:flex;flex-direction:column;gap:18px}
+#p-question{font-weight:600;font-size:clamp(28px,7vw,40px);line-height:1.12;margin:6px 0 2px;text-wrap:balance}
+#p-form{display:flex;flex-direction:column;gap:12px}
+#p-input{width:100%;min-height:96px;resize:vertical;padding:16px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font-size:1.15rem;font-family:inherit}
+#p-input:focus{outline:none;border-color:var(--accent)}
+#p-form button{align-self:flex-start;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:14px 34px;font-size:1.05rem;font-weight:600;cursor:pointer}
+#p-form button:disabled{opacity:.5}
+.done{color:var(--sage);font-weight:600}
+.foot{color:var(--muted);font-size:.82rem;margin-top:4px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;padding:16px 22px;padding-top:calc(16px + env(safe-area-inset-top,0px));background:var(--surface);border-bottom:1.5px solid var(--line)}
+.join{display:flex;align-items:center;gap:12px}
+#qr{width:132px;height:132px;border-radius:12px;background:#fffaf3;padding:6px;flex:none}
+#qr img,#qr canvas{display:block;width:100%!important;height:100%!important}
+.joininfo .url{font-size:.8rem;color:var(--muted);word-break:break-all;max-width:220px;margin-top:3px}
+.prompts{display:flex;flex-wrap:wrap;gap:8px;flex:1;min-width:0}
+.pbtn{border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:9px 16px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit}
+.pbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.meta{display:flex;align-items:center;gap:16px;margin-left:auto}
+.count-wrap{display:flex;flex-direction:column;align-items:center;line-height:1}
+.count{font-size:1.7rem;font-weight:700;font-family:"Fraunces",serif}
+.count-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.reset{border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:9px 14px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.present-q{font-weight:600;font-size:clamp(22px,3.4vw,34px);line-height:1.15;padding:26px 26px 6px;text-wrap:balance}
+.wall{display:flex;flex-wrap:wrap;align-content:flex-start;gap:14px 16px;padding:18px 26px 60px}
+.pill{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:10px 18px;font-family:"Fraunces",Georgia,serif;font-weight:500;color:var(--ink);line-height:1.2;max-width:100%;overflow-wrap:anywhere}
+.pill.new{animation:pop .5s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.empty{color:var(--muted);padding:30px 26px;font-size:1.05rem}
+@media (prefers-reduced-motion:reduce){.pill.new{animation:none}}
+</style></head><body>
+<div id="join" hidden><div class="jwrap"><div class="eyebrow">EMBRACE &middot; you are in</div><h1 id="p-question" class="serif">How is the weather inside you right now?</h1><form id="p-form"><textarea id="p-input" rows="2" maxlength="280" placeholder="one word"></textarea><button type="submit">Send</button></form><div id="p-done" class="done" hidden>Sent &mdash; you can add another any time</div><div class="foot">Anonymous. Nothing here is linked to you.</div></div></div>
+<div id="present" hidden><div class="bar"><div class="join"><div id="qr"></div><div class="joininfo"><div class="eyebrow">Scan to join</div><div id="join-url" class="url"></div></div></div><div id="prompts" class="prompts"></div><div class="meta"><div class="count-wrap"><span id="count" class="count">0</span><span class="count-label">shared</span></div><button id="reset" class="reset">Clear wall</button></div></div><div id="present-q" class="present-q serif">How is the weather inside you right now?</div><div id="wall" class="wall"></div><div id="wall-empty" class="empty">Waiting for the first voice &mdash; scan the code to add yours.</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+var SB_URL="https://wenwjbrttkvxqgwcnqjp.supabase.co";
+var SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlbndqYnJ0dGt2eHFnd2NucWpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1NTI1MjYsImV4cCI6MjA5MjEyODUyNn0.lI6vEY98u2AgCf8QjrHn5yt4OhT3L1genteFP6Itiow";
+var PROMPTS=[
+{key:"weather",label:"Weather check",q:"How is the weather inside you right now?",hint:"one word"},
+{key:"noise",label:"The noise",q:"Where does that judging voice come from, and who does it belong to?",hint:"a few words"},
+{key:"pledge",label:"The wall",q:"One small thing you will put into the world this week",hint:"I will..."},
+{key:"takeaway",label:"Take home",q:"I am walking out of here with...",hint:"one sentence"}
+];
+function getPrompt(k){for(var i=0;i<PROMPTS.length;i++){if(PROMPTS[i].key===k)return PROMPTS[i];}return PROMPTS[0];}
+var active="weather";
+var isPresent=(location.hash==="#present");
+var client=window.supabase.createClient(SB_URL,SB_KEY);
+var joinView=document.getElementById("join");
+var presentView=document.getElementById("present");
+if(isPresent){joinView.hidden=true;presentView.hidden=false;}else{presentView.hidden=true;joinView.hidden=false;}
+var wallEl=document.getElementById("wall");
+var countN=0;
+function renderQuestion(){var p=getPrompt(active);var q=document.getElementById("p-question");if(q)q.textContent=p.q;var inp=document.getElementById("p-input");if(inp)inp.placeholder=p.hint;var pq=document.getElementById("present-q");if(pq)pq.textContent=p.q;var btns=presentView.querySelectorAll(".pbtn");for(var i=0;i<btns.length;i++){btns[i].className="pbtn"+(btns[i].getAttribute("data-k")===active?" on":"");}}
+function setCount(n){countN=n;var c=document.getElementById("count");if(c)c.textContent=String(n);var e=document.getElementById("wall-empty");if(e)e.hidden=(n>0);}
+function addPill(word,isNew){if(!wallEl)return;var s=document.createElement("span");s.className="pill"+(isNew?" new":"");var len=(word||"").length;s.style.fontSize=(len<=16?"2.1rem":len<=44?"1.35rem":"1.05rem");s.textContent=word;wallEl.appendChild(s);}
+function clearWall(){if(wallEl)wallEl.innerHTML="";setCount(0);}
+function loadWall(){if(!isPresent)return;clearWall();client.from("embrace_wall").select("word").eq("prompt",active).order("created_at",{ascending:true}).then(function(res){var rows=(res&&res.data)||[];for(var i=0;i<rows.length;i++){addPill(rows[i].word,false);}setCount(rows.length);});}
+function applyPrompt(k){active=k;renderQuestion();if(isPresent)loadWall();}
+if(!isPresent){var form=document.getElementById("p-form");form.addEventListener("submit",function(e){e.preventDefault();var inp=document.getElementById("p-input");var v=(inp.value||"").replace(/^\s+|\s+$/g,"");if(!v)return;if(v.length>280)v=v.substring(0,280);inp.value="";inp.disabled=true;client.from("embrace_wall").insert({prompt:active,word:v}).then(function(){inp.disabled=false;var d=document.getElementById("p-done");d.hidden=false;setTimeout(function(){d.hidden=true;},2600);try{inp.focus();}catch(e2){}});});}
+if(isPresent){var joinUrl=location.origin+location.pathname;var u=document.getElementById("join-url");if(u)u.textContent=joinUrl.replace("https://","");try{new window.QRCode(document.getElementById("qr"),{text:joinUrl,width:300,height:300,colorDark:"#3c3531",colorLight:"#fffaf3",correctLevel:window.QRCode.CorrectLevel.H});}catch(e){}var pb=document.getElementById("prompts");PROMPTS.forEach(function(p){var b=document.createElement("button");b.className="pbtn";b.setAttribute("data-k",p.key);b.textContent=p.label;b.addEventListener("click",function(){setPrompt(p.key);});pb.appendChild(b);});var resetArm=false;var rb=document.getElementById("reset");rb.addEventListener("click",function(){if(!resetArm){resetArm=true;rb.textContent="Tap again to clear";setTimeout(function(){resetArm=false;rb.textContent="Clear wall";},3000);return;}resetArm=false;rb.textContent="Clear wall";client.from("embrace_wall").delete().eq("prompt",active).then(function(){clearWall();});});}
+function setPrompt(k){client.from("embrace_settings").update({active_prompt:k,updated_at:new Date().toISOString()}).eq("id",1).then(function(){applyPrompt(k);});}
+client.channel("embrace-live").on("postgres_changes",{event:"INSERT",schema:"public",table:"embrace_wall"},function(p){var row=p.new;if(isPresent&&row.prompt===active){addPill(row.word,true);setCount(countN+1);}}).on("postgres_changes",{event:"UPDATE",schema:"public",table:"embrace_settings"},function(p){applyPrompt(p.new.active_prompt);}).subscribe();
+client.from("embrace_settings").select("active_prompt").eq("id",1).single().then(function(res){var k=(res&&res.data&&res.data.active_prompt)||"weather";applyPrompt(k);});
+})();
+</script></body></html>

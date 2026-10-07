@@ -1,44 +1,57 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EMBRACE Live Wall</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"><style>
-:root{color-scheme:light;--bg:#f6efe5;--surface:#fffaf3;--ink:#3c3531;--muted:#8a7f76;--line:#e7ddce;--accent:#a75f50;--sage:#6f8a7d;--gold:#c49a55}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#17140f;--surface:#221c15;--ink:#efe8dd;--muted:#a79c8d;--line:#332c22;--accent:#e0a593;--sage:#8fb3a3;--gold:#e4b659}}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EMBRACE Live Wall</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap"><style>
+:root{color-scheme:light;--ink:#4a403a;--muted:#9c8f84;--line:rgba(120,95,80,.16);--accent:#b9735f;--glass:rgba(255,251,245,.62);--bar:rgba(255,251,245,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--ink:#efe7dd;--muted:#a99e92;--line:rgba(255,255,255,.14);--accent:#e7a996;--glass:rgba(40,34,44,.55);--bar:rgba(30,26,34,.55)}}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.serif{font-family:"Fraunces",Georgia,serif}
-.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+body{color:var(--ink);font-family:"Fraunces",Georgia,serif;-webkit-font-smoothing:antialiased;background:linear-gradient(160deg,#f7efe7,#f4e5df,#eae9df,#e7e2ef);background-attachment:fixed}
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;mix-blend-mode:multiply}
+.o1{width:48vmax;height:48vmax;background:#f3c4b8;top:-12vmax;left:-8vmax;animation:d1 36s ease-in-out infinite}
+.o2{width:42vmax;height:42vmax;background:#cfe1d3;bottom:-14vmax;right:-8vmax;animation:d2 44s ease-in-out infinite}
+.o3{width:36vmax;height:36vmax;background:#ded4ef;top:24%;right:14%;animation:d3 52s ease-in-out infinite}
+.o4{width:32vmax;height:32vmax;background:#f6e2c4;bottom:10%;left:12%;animation:d4 40s ease-in-out infinite}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .orb{opacity:.4;mix-blend-mode:screen}body{background:linear-gradient(160deg,#1b1720,#241c26,#1b231f,#201a2b)}}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(4vmax,3vmax)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vmax,-2vmax)}}
+@keyframes d3{0%,100%{transform:translate(0,0)}50%{transform:translate(-3vmax,4vmax)}}
+@keyframes d4{0%,100%{transform:translate(0,0)}50%{transform:translate(3vmax,-4vmax)}}
+.eyebrow{font-family:"Fraunces",serif;font-style:italic;font-size:.95rem;letter-spacing:.04em;color:var(--accent);font-weight:500}
 #join{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 20px}
-.jwrap{width:100%;max-width:520px;display:flex;flex-direction:column;gap:18px}
-#p-question{font-weight:600;font-size:clamp(28px,7vw,40px);line-height:1.12;margin:6px 0 2px;text-wrap:balance}
-#p-form{display:flex;flex-direction:column;gap:12px}
-#p-input{width:100%;min-height:96px;resize:vertical;padding:16px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font-size:1.15rem;font-family:inherit}
+.jwrap{width:100%;max-width:540px;display:flex;flex-direction:column;gap:20px;text-align:center}
+#p-question{font-weight:500;font-size:clamp(28px,7vw,42px);line-height:1.16;margin:4px 0 2px;text-wrap:balance;text-shadow:0 1px 20px rgba(255,255,255,.5)}
+#p-form{display:flex;flex-direction:column;gap:14px;align-items:center}
+#p-input{width:100%;min-height:104px;resize:vertical;padding:18px;border:1px solid var(--line);border-radius:22px;background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);font-size:1.2rem;font-family:inherit;box-shadow:0 10px 34px rgba(120,90,70,.1)}
+#p-input::placeholder{color:var(--muted);font-style:italic}
 #p-input:focus{outline:none;border-color:var(--accent)}
-#p-form button{align-self:flex-start;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:14px 34px;font-size:1.05rem;font-weight:600;cursor:pointer}
+#p-form button{background:var(--accent);color:#fff;border:none;border-radius:999px;padding:14px 40px;font-size:1.1rem;font-weight:500;font-family:inherit;cursor:pointer;box-shadow:0 8px 26px rgba(185,115,95,.35)}
 #p-form button:disabled{opacity:.5}
-.done{color:var(--sage);font-weight:600}
-.foot{color:var(--muted);font-size:.82rem;margin-top:4px}
-.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;padding:16px 22px;padding-top:calc(16px + env(safe-area-inset-top,0px));background:var(--surface);border-bottom:1.5px solid var(--line)}
-.join{display:flex;align-items:center;gap:12px}
-#qr{width:132px;height:132px;border-radius:12px;background:#fffaf3;padding:6px;flex:none}
-#qr img,#qr canvas{display:block;width:100%!important;height:100%!important}
-.joininfo .url{font-size:.8rem;color:var(--muted);word-break:break-all;max-width:220px;margin-top:3px}
-.prompts{display:flex;flex-wrap:wrap;gap:8px;flex:1;min-width:0}
-.pbtn{border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:9px 16px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit}
-.pbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.meta{display:flex;align-items:center;gap:16px;margin-left:auto}
+.done{color:var(--accent);font-style:italic;font-size:1.05rem}
+.foot{color:var(--muted);font-size:.85rem;font-style:italic}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;padding:16px 24px;padding-top:calc(16px + env(safe-area-inset-top,0px));background:var(--bar);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.join{display:flex;align-items:center;gap:14px}
+#qr{width:120px;height:120px;border-radius:16px;background:#fffdf9;padding:7px;flex:none;box-shadow:0 8px 24px rgba(120,90,70,.14)}
+#qr img,#qr canvas{display:block;width:100%!important;height:100%!important;border-radius:8px}
+.joininfo .url{font-size:.82rem;color:var(--muted);word-break:break-all;max-width:220px;margin-top:4px;font-style:italic}
+.prompts{display:flex;flex-wrap:wrap;gap:9px;flex:1;min-width:0;justify-content:center}
+.pbtn{border:1px solid var(--line);background:var(--glass);color:var(--muted);border-radius:999px;padding:9px 18px;font-size:1rem;font-weight:500;font-family:inherit;cursor:pointer;transition:all .3s ease}
+.pbtn.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(185,115,95,.3)}
+.meta{display:flex;align-items:center;gap:18px;margin-left:auto}
 .count-wrap{display:flex;flex-direction:column;align-items:center;line-height:1}
-.count{font-size:1.7rem;font-weight:700;font-family:"Fraunces",serif}
-.count-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.reset{border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:9px 14px;font-size:.85rem;cursor:pointer;font-family:inherit}
-.present-q{font-weight:600;font-size:clamp(22px,3.4vw,34px);line-height:1.15;padding:26px 26px 6px;text-wrap:balance}
-.wall{display:flex;flex-wrap:wrap;align-content:flex-start;gap:14px 16px;padding:18px 26px 60px}
-.pill{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:10px 18px;font-family:"Fraunces",Georgia,serif;font-weight:500;color:var(--ink);line-height:1.2;max-width:100%;overflow-wrap:anywhere}
-.pill.new{animation:pop .5s cubic-bezier(.2,.9,.3,1.2)}
-@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
-.empty{color:var(--muted);padding:30px 26px;font-size:1.05rem}
-@media (prefers-reduced-motion:reduce){.pill.new{animation:none}}
+.count{font-size:1.9rem;font-weight:500}
+.count-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.reset{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:9px 15px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.present-q{font-weight:500;font-size:clamp(24px,3.6vw,38px);line-height:1.18;padding:34px 28px 8px;text-align:center;text-wrap:balance;text-shadow:0 1px 22px rgba(255,255,255,.45)}
+.wall{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:16px 20px;padding:24px 28px 70px;min-height:46vh}
+.pill{animation:drift var(--dur,7s) ease-in-out infinite;animation-delay:var(--delay,0s);will-change:transform}
+.pill .inner{display:inline-block;padding:13px 26px;border-radius:999px;font-style:italic;font-weight:500;color:var(--ink);background:var(--tint,rgba(255,251,245,.8));border:1px solid rgba(255,255,255,.6);box-shadow:0 8px 30px rgba(120,90,70,.14),inset 0 1px 12px rgba(255,255,255,.4);line-height:1.25;transform:rotate(var(--rot,0deg));animation:rise 1s cubic-bezier(.2,.8,.25,1) both}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes rise{from{opacity:0;transform:rotate(var(--rot,0deg)) translateY(22px) scale(.92);filter:blur(6px)}to{opacity:1;transform:rotate(var(--rot,0deg)) translateY(0) scale(1);filter:blur(0)}}
+.empty{color:var(--muted);padding:40px 28px;font-size:1.15rem;font-style:italic;text-align:center;width:100%}
+@media (prefers-reduced-motion:reduce){.orb,.pill{animation:none}.pill .inner{animation:none}}
 </style></head><body>
-<div id="join" hidden><div class="jwrap"><div class="eyebrow">EMBRACE &middot; you are in</div><h1 id="p-question" class="serif">How is the weather inside you right now?</h1><form id="p-form"><textarea id="p-input" rows="2" maxlength="280" placeholder="one word"></textarea><button type="submit">Send</button></form><div id="p-done" class="done" hidden>Sent &mdash; you can add another any time</div><div class="foot">Anonymous. Nothing here is linked to you.</div></div></div>
-<div id="present" hidden><div class="bar"><div class="join"><div id="qr"></div><div class="joininfo"><div class="eyebrow">Scan to join</div><div id="join-url" class="url"></div></div></div><div id="prompts" class="prompts"></div><div class="meta"><div class="count-wrap"><span id="count" class="count">0</span><span class="count-label">shared</span></div><button id="reset" class="reset">Clear wall</button></div></div><div id="present-q" class="present-q serif">How is the weather inside you right now?</div><div id="wall" class="wall"></div><div id="wall-empty" class="empty">Waiting for the first voice &mdash; scan the code to add yours.</div></div>
+<div class="sky" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span></div>
+<div id="join" hidden><div class="jwrap"><div class="eyebrow">EMBRACE &middot; you are here</div><h1 id="p-question">How is the weather inside you right now?</h1><form id="p-form"><textarea id="p-input" rows="2" maxlength="280" placeholder="one word"></textarea><button type="submit">Send gently</button></form><div id="p-done" class="done" hidden>Your voice is on the wall &#128156;</div><div class="foot">Anonymous. Nothing here is linked to you.</div></div></div>
+<div id="present" hidden><div class="bar"><div class="join"><div id="qr"></div><div class="joininfo"><div class="eyebrow">Scan to join</div><div id="join-url" class="url"></div></div></div><div id="prompts" class="prompts"></div><div class="meta"><div class="count-wrap"><span id="count" class="count">0</span><span class="count-label">voices</span></div><button id="reset" class="reset">Clear wall</button></div></div><div id="present-q" class="present-q">How is the weather inside you right now?</div><div id="wall" class="wall"></div><div id="wall-empty" class="empty">Waiting for the first voice &mdash; scan the code to add yours.</div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
@@ -52,6 +65,7 @@ var PROMPTS=[
 {key:"pledge",label:"The wall",q:"One small thing you will put into the world this week",hint:"I will..."},
 {key:"takeaway",label:"Take home",q:"I am walking out of here with...",hint:"one sentence"}
 ];
+var TINTS=["rgba(246,223,218,.82)","rgba(224,236,224,.82)","rgba(230,223,243,.82)","rgba(247,232,208,.82)","rgba(220,235,238,.82)","rgba(245,226,230,.82)"];
 function getPrompt(k){for(var i=0;i<PROMPTS.length;i++){if(PROMPTS[i].key===k)return PROMPTS[i];}return PROMPTS[0];}
 var active="weather";
 var isPresent=(location.hash==="#present");
@@ -63,14 +77,15 @@ var wallEl=document.getElementById("wall");
 var countN=0;
 function renderQuestion(){var p=getPrompt(active);var q=document.getElementById("p-question");if(q)q.textContent=p.q;var inp=document.getElementById("p-input");if(inp)inp.placeholder=p.hint;var pq=document.getElementById("present-q");if(pq)pq.textContent=p.q;var btns=presentView.querySelectorAll(".pbtn");for(var i=0;i<btns.length;i++){btns[i].className="pbtn"+(btns[i].getAttribute("data-k")===active?" on":"");}}
 function setCount(n){countN=n;var c=document.getElementById("count");if(c)c.textContent=String(n);var e=document.getElementById("wall-empty");if(e)e.hidden=(n>0);}
-function addPill(word,isNew){if(!wallEl)return;var s=document.createElement("span");s.className="pill"+(isNew?" new":"");var len=(word||"").length;s.style.fontSize=(len<=16?"2.1rem":len<=44?"1.35rem":"1.05rem");s.textContent=word;wallEl.appendChild(s);}
+function rnd(a,b){return a+Math.random()*(b-a);}
+function addPill(word){if(!wallEl)return;var p=document.createElement("span");p.className="pill";p.style.setProperty("--dur",rnd(6,9).toFixed(2)+"s");p.style.setProperty("--delay",rnd(0,3).toFixed(2)+"s");var inner=document.createElement("span");inner.className="inner";inner.style.setProperty("--rot",rnd(-5,5).toFixed(1)+"deg");inner.style.background=TINTS[Math.floor(Math.random()*TINTS.length)];var len=(word||"").length;inner.style.fontSize=(len<=16?"2.2rem":len<=44?"1.4rem":"1.1rem");inner.textContent=word;p.appendChild(inner);wallEl.appendChild(p);}
 function clearWall(){if(wallEl)wallEl.innerHTML="";setCount(0);}
-function loadWall(){if(!isPresent)return;clearWall();client.from("embrace_wall").select("word").eq("prompt",active).order("created_at",{ascending:true}).then(function(res){var rows=(res&&res.data)||[];for(var i=0;i<rows.length;i++){addPill(rows[i].word,false);}setCount(rows.length);});}
+function loadWall(){if(!isPresent)return;clearWall();client.from("embrace_wall").select("word").eq("prompt",active).order("created_at",{ascending:true}).then(function(res){var rows=(res&&res.data)||[];for(var i=0;i<rows.length;i++){addPill(rows[i].word);}setCount(rows.length);});}
 function applyPrompt(k){active=k;renderQuestion();if(isPresent)loadWall();}
 if(!isPresent){var form=document.getElementById("p-form");form.addEventListener("submit",function(e){e.preventDefault();var inp=document.getElementById("p-input");var v=(inp.value||"").replace(/^\s+|\s+$/g,"");if(!v)return;if(v.length>280)v=v.substring(0,280);inp.value="";inp.disabled=true;client.from("embrace_wall").insert({prompt:active,word:v}).then(function(){inp.disabled=false;var d=document.getElementById("p-done");d.hidden=false;setTimeout(function(){d.hidden=true;},2600);try{inp.focus();}catch(e2){}});});}
-if(isPresent){var joinUrl=location.origin+location.pathname;var u=document.getElementById("join-url");if(u)u.textContent=joinUrl.replace("https://","");try{new window.QRCode(document.getElementById("qr"),{text:joinUrl,width:300,height:300,colorDark:"#3c3531",colorLight:"#fffaf3",correctLevel:window.QRCode.CorrectLevel.H});}catch(e){}var pb=document.getElementById("prompts");PROMPTS.forEach(function(p){var b=document.createElement("button");b.className="pbtn";b.setAttribute("data-k",p.key);b.textContent=p.label;b.addEventListener("click",function(){setPrompt(p.key);});pb.appendChild(b);});var resetArm=false;var rb=document.getElementById("reset");rb.addEventListener("click",function(){if(!resetArm){resetArm=true;rb.textContent="Tap again to clear";setTimeout(function(){resetArm=false;rb.textContent="Clear wall";},3000);return;}resetArm=false;rb.textContent="Clear wall";client.from("embrace_wall").delete().eq("prompt",active).then(function(){clearWall();});});}
+if(isPresent){var joinUrl=location.origin+location.pathname;var u=document.getElementById("join-url");if(u)u.textContent=joinUrl.replace("https://","");try{new window.QRCode(document.getElementById("qr"),{text:joinUrl,width:300,height:300,colorDark:"#4a403a",colorLight:"#fffdf9",correctLevel:window.QRCode.CorrectLevel.H});}catch(e){}var pb=document.getElementById("prompts");PROMPTS.forEach(function(p){var b=document.createElement("button");b.className="pbtn";b.setAttribute("data-k",p.key);b.textContent=p.label;b.addEventListener("click",function(){setPrompt(p.key);});pb.appendChild(b);});var resetArm=false;var rb=document.getElementById("reset");rb.addEventListener("click",function(){if(!resetArm){resetArm=true;rb.textContent="Tap again to clear";setTimeout(function(){resetArm=false;rb.textContent="Clear wall";},3000);return;}resetArm=false;rb.textContent="Clear wall";client.from("embrace_wall").delete().eq("prompt",active).then(function(){clearWall();});});}
 function setPrompt(k){client.from("embrace_settings").update({active_prompt:k,updated_at:new Date().toISOString()}).eq("id",1).then(function(){applyPrompt(k);});}
-client.channel("embrace-live").on("postgres_changes",{event:"INSERT",schema:"public",table:"embrace_wall"},function(p){var row=p.new;if(isPresent&&row.prompt===active){addPill(row.word,true);setCount(countN+1);}}).on("postgres_changes",{event:"UPDATE",schema:"public",table:"embrace_settings"},function(p){applyPrompt(p.new.active_prompt);}).subscribe();
+client.channel("embrace-live").on("postgres_changes",{event:"INSERT",schema:"public",table:"embrace_wall"},function(p){var row=p.new;if(isPresent&&row.prompt===active){addPill(row.word);setCount(countN+1);}}).on("postgres_changes",{event:"UPDATE",schema:"public",table:"embrace_settings"},function(p){applyPrompt(p.new.active_prompt);}).subscribe();
 client.from("embrace_settings").select("active_prompt").eq("id",1).single().then(function(res){var k=(res&&res.data&&res.data.active_prompt)||"weather";applyPrompt(k);});
 })();
 </script></body></html>
